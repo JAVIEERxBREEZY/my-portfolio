@@ -1,4 +1,4 @@
-import { Injectable,Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
@@ -9,6 +9,8 @@ const STORAGE_KEY = 'lang';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
+  private readonly _ts = inject(TranslateService);
+
 
   //#region VARIABLES
   private readonly _activeLang$ = new BehaviorSubject<Lang>('es');
@@ -19,16 +21,7 @@ export class LanguageService {
     return this._activeLang$.value;
   }
 
-  private readonly isBrowser: boolean // útil para SSR y tests
-  //#endregion
-
-  //#region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor(
-    private readonly _ts: TranslateService,
-    @Inject(PLATFORM_ID) platforrmId: Object
-  ) {
-    this.isBrowser = isPlatformBrowser(platforrmId);
-  }
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID)); // útil para SSR y tests
   //#endregion
 
   //#region PUBLIC METHODS

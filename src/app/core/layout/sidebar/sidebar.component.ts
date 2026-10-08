@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'jav-sidebar',
@@ -14,7 +14,6 @@ export class SidebarComponent implements OnInit {
 
   // #endregion
 
-  constructor() { }
 
   ngOnInit(): void {
   }

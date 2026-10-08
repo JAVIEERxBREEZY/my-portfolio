@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { LanguageService } from './core/services/language.service';
 import { SidebarStatusService } from './shared/services/sidebar-status.service';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,10 @@ import { Subscription } from 'rxjs';
     standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
+  private readonly _ls = inject(LanguageService);
+  private readonly _sss = inject(SidebarStatusService);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
 
   // #region VARIABLES
   public sidebarActive: boolean = false;
@@ -18,9 +22,8 @@ export class AppComponent implements OnInit, OnDestroy {
   // #endregion
 
   // #region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor(private _ls: LanguageService, private _sss: SidebarStatusService,
-    private _cdr: ChangeDetectorRef) {
-    _ls.setInitialLanguage();
+  constructor() {
+    this._ls.setInitialLanguage();
   }
   // #endregion
 

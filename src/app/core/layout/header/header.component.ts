@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownListItem, IDropdownPosition } from 'src/app/core/models/interfaces/dropdown-list.interface';
@@ -16,6 +16,12 @@ import { SUPPORTED_LANGS } from '../../models/types/lang.type';
     standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  private readonly _ls = inject(LanguageService);
+  private readonly _ts = inject(TranslateService);
+  private readonly _sss = inject(SidebarStatusService);
+  private readonly _router = inject(Router);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
 
     // #region VIEWCHILD, HOSTLISTENER
     @ViewChild('flagSection') flagSection!: ElementRef;
@@ -49,14 +55,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private listObservers$: Array<Subscription> = [];
   // #endregion
-  
-  // #region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor(private _ls: LanguageService, private _ts: TranslateService,
-    private _sss: SidebarStatusService,
-    private _router: Router,
-    private _cdr: ChangeDetectorRef
-  ) {}
 
+  // #region LIFECYCLE HOOKS
   ngOnInit(): void {
     const observableLang$ = this.getInitialLang();
     const observableRoute$ = this.getActiveRoute();

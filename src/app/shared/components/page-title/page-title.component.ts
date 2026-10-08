@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
     selector: 'jav-page-title',
@@ -8,8 +8,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 })
 export class PageTitleComponent {
 
-  @Input() title: string = "";
-  @Input() description: string = "";
-  @Input() classes: string = "u-text-center";
+  readonly title = input<string>("");
+  readonly description = input<string>("");
+  readonly classes = input<string>("u-text-center");
 
 }

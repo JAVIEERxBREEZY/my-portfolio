@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, HostListener, ChangeDetectionStrategy, input } from '@angular/core';
 import { ICompaniesCard } from 'src/app/core/models/interfaces/companies-card.interface';
 
 @Component({
@@ -17,13 +17,13 @@ export class CompanyCardComponent implements OnInit {
   // #endregion
 
   // #region INPUTS & OUTPUTS
-  @Input() data: ICompaniesCard = {
+  readonly data = input<ICompaniesCard>({
     title: '',
     logo: '',
     description: '',
     timeline : '',
     techs : []
-  };
+  });
   // #endregion
 
   // #region VARIABLES
@@ -33,7 +33,6 @@ export class CompanyCardComponent implements OnInit {
   // #endregion
 
   // #region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor() { }
 
   ngOnInit(): void {
     this.setModalSizeResponsive();

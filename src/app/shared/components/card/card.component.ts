@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 import { ICard, ICardColors } from 'src/app/core/models/interfaces/card.interface';
 
 @Component({
@@ -11,24 +11,23 @@ import { ICard, ICardColors } from 'src/app/core/models/interfaces/card.interfac
 export class CardComponent implements OnInit {
 
   //#region INPUTS & OUTPUTS
-  @Input() cardInfo: ICard = {
+  readonly cardInfo = input<ICard>({
     title: '',
     image: '',
     icon: '',
     description: '',
     name: '',
     link: ''
-  };
+  });
 
-  @Input() customColors: ICardColors = {
+  readonly customColors = input<ICardColors>({
     header: 'black',
     content: 'white'
-  };
+  });
 
-  @Input() btnType: string = "c-btn";
+  readonly btnType = input<string>("c-btn");
   //#endregion
 
-  constructor() { }
 
   ngOnInit(): void {
   }

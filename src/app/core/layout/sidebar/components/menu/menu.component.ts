@@ -1,9 +1,8 @@
-import { Component, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { IMenuItem } from 'src/app/core/models/interfaces/menu-item.interface';
 import { NavigationEnd, Router } from '@angular/router';
 import { MENU_ITEMS } from 'src/app/core/models/constants/menu-items.constants';
 import { SidebarStatusService } from 'src/app/shared/services/sidebar-status.service';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jav-menu',
@@ -12,28 +11,23 @@ import { Subscription } from 'rxjs';
     standalone: false
 })
 export class MenuComponent implements OnDestroy {
+  private readonly _router = inject(Router);
+  private readonly _sss = inject(SidebarStatusService);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
 
 
   // #region VARIABLES
 
-  public activeRoute: string = "";
-  private readonly routeSubscription: Subscription;
+  public activeRoute: string = this._router.url;
+  private readonly routeSubscription = this._router.events.subscribe((event) => {
+    if (event instanceof NavigationEnd) {
+      this.changeActiveRoute();
+    }
+  });
 
   public readonly menuItems: IMenuItem[] = MENU_ITEMS;
   // #endregion
-
-  constructor(
-    private _router: Router,
-    private _sss: SidebarStatusService,
-    private _cdr: ChangeDetectorRef
-  ) {
-    this.activeRoute = _router.url;
-    this.routeSubscription = _router.events.subscribe((event) => {
-      if(event instanceof NavigationEnd) {
-        this.changeActiveRoute();
-      }
-    });
-  }
 
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();

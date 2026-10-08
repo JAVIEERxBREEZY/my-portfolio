@@ -1,9 +1,9 @@
-@if (title !== '') {
-  <section [ngClass]="classes">
-    <h2 class="u-fs-40 u-my-0"> {{ title }} </h2>
-    @if (description !== '') {
+@if (title() !== '') {
+  <section [ngClass]="classes()">
+    <h2 class="u-fs-40 u-my-0"> {{ title() }} </h2>
+    @if (description() !== '') {
       <h3 class="u-fs-24">
-        {{ description }}
+        {{ description() }}
       </h3>
     }
   </section>

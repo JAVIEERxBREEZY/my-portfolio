@@ -1,20 +1,20 @@
-@if (data.title !== '' && data.logo !== '' && data.description !== '') {
+@if (data().title !== '' && data().logo !== '' && data().description !== '') {
   <div
     class="jav-company-card"
     >
     <div class="u-w-per-100 p-flexss u-gap-14">
       <div class="jav-company-card__logo">
-        <img [src]="data.logo" [alt]="data.title" width="100%" height="auto">
+        <img [src]="data().logo" [alt]="data().title" width="100%" height="auto">
       </div>
       <div class="jav-company-card__info">
         <h4 class="u-fs-20 u-color-dark-primary u-mt-0 u-mb-1">
-          {{ data.title }}
+          {{ data().title }}
         </h4>
         <p class="u-color-dark-primary u-fs-14 u-mb-1">
-          <b> {{ data.timeline | translate }} </b>
+          <b> {{ data().timeline | translate }} </b>
         </p>
         <p class="jav-company-card__description u-color-dark-primary u-fs-14">
-          {{ data.description | translate }}
+          {{ data().description | translate }}
         </p>
       </div>
     </div>
@@ -28,7 +28,7 @@
 @if (seeMore) {
   <jav-modal-layout [wrapperWidth]="modalWidth">
     <div body>
-      <jav-exp-details [data]="data" (closeDetails)="closeDetails()"></jav-exp-details>
+      <jav-exp-details [data]="data()" (closeDetails)="closeDetails()"></jav-exp-details>
     </div>
   </jav-modal-layout>
 }

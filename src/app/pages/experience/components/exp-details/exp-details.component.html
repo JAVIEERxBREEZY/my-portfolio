@@ -2,21 +2,21 @@
   <!-- #region HEADING SECTION -->
   <section class="jav-exp-details__heading u-w-per-100 p-flexss u-gap-24 u-mb-3">
     <div class="jav-exp-details__logo">
-      <img [src]="data.logo" [alt]="data.title" width="100%" height="auto">
+      <img [src]="data().logo" [alt]="data().title" width="100%" height="auto">
     </div>
     <div class="jav-exp-details__title">
       <h2 class="u-color-dark-primary u-mt-0">
-        {{ data.title }}
+        {{ data().title }}
       </h2>
       <p class="u-fs-16 u-color-dark-primary">
-        {{ data.timeline | translate }}
+        {{ data().timeline | translate }}
       </p>
     </div>
   </section>
   <!-- #endregion -->
   <!-- #region TAGS -->
   <section class="jav-exp-details__techs u-w-per-100 p-flexcs u-fwrap-wrap u-gap-8 u-mb-3">
-    @for (tag of data.techs; track tag) {
+    @for (tag of data().techs; track tag) {
       <span class="e-tag info">
         {{ tag }}
       </span>
@@ -25,7 +25,7 @@
   <!-- #endregion -->
   <!-- #region DESCRIPTION -->
   <section class="jav-exp-details__description u-w-per-100">
-    <p class="u-fs-16 u-color-dark-primary" [innerHTML]="data.description | translate"></p>
+    <p class="u-fs-16 u-color-dark-primary" [innerHTML]="data().description | translate"></p>
   </section>
   <!-- #endregion -->
 

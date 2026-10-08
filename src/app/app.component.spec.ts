@@ -93,6 +93,25 @@ describe('Portfolio with OnPush', () => {
     expect(host.querySelector('.jav-company-card__description')!.textContent).toContain('Experiencia en Yub');
   });
 
+  it('selects a language with the keyboard and closes the dropdown on an outside click', async () => {
+    const toggle = host.querySelector<HTMLElement>('.jav-header__main')!;
+    toggle.click();
+    await fixture.whenStable();
+    const english = Array.from(host.querySelectorAll<HTMLElement>('.c-dropdown__item'))
+      .find(item => item.textContent!.trim() === 'English')!;
+    english.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter', bubbles: true }));
+    await fixture.whenStable();
+    expect(host.querySelector<HTMLImageElement>('.jav-header__flag img')!.src).toContain('/en.png');
+    expect(host.querySelector('jav-dropdown-list')).toBeNull();
+
+    toggle.click();
+    await fixture.whenStable();
+    expect(host.querySelector('jav-dropdown-list')).not.toBeNull();
+    host.querySelector<HTMLElement>('.jav-header__state')!.click();
+    await fixture.whenStable();
+    expect(host.querySelector('jav-dropdown-list')).toBeNull();
+  });
+
   it('opens and closes company details through the nested component outputs', async () => {
     await router.navigateByUrl('/cv');
     await fixture.whenStable();

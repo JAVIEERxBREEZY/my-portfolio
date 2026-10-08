@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class AppOverflowService {
 
-  constructor() { }
 
   public setMobileOverflow(): void {
     const container = document.querySelector<HTMLElement>('#jav-app-container');

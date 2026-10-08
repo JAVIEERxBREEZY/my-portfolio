@@ -1,9 +1,9 @@
 <div
   #dropdownList
   class="c-dropdown u-pos-absolute u-bg-dark-secondary u-p-2"
-  [ngStyle]="position"
+  [ngStyle]="position()"
   >
-  @for (item of items; track item; let l = $last) {
+  @for (item of items(); track item; let l = $last) {
     <div
       class="c-dropdown__item u-p-1 p-flexcs u-gap-8" [class.u-mb-1]="!l"
       role="button" tabindex="0"

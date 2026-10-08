@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from 'src/app/core/services/language.service';
 import TypeIt from "typeit";
@@ -13,6 +13,9 @@ import { TYPEIT_ES, TYPEIT_EN, DELETE_EN, DELETE_ES } from './constants/typeit.c
     standalone: false
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+  private readonly _ls = inject(LanguageService);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
 
   //#region READONLY VARIABLES
   private readonly typeitSpanish: ITypeitText = TYPEIT_ES;
@@ -32,10 +35,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private secondTypeitInstance?: TypeIt;
 
   private listObservers$: Array<Subscription> = [];
-  //#endregion
-
-  //#region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor(private _ls: LanguageService, private _cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.listObservers$.push(this.getLang());
