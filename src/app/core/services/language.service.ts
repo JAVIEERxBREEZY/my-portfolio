@@ -55,7 +55,7 @@ export class LanguageService {
   private applyLang(lang: Lang, firstRender: boolean = false): void {
    const changed = this._activeLang$.value !== lang;
 
-    this._ts.setDefaultLang(lang);
+    this._ts.setFallbackLang(lang);
     this._ts.use(lang);
 
     if (!changed && !firstRender) return;

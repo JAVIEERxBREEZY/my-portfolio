@@ -4,9 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/layout/header/header.component';
 import { DropdownListComponent } from './shared/components/dropdown-list/dropdown-list.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideTranslateService, TranslatePipe } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
 import { MenuComponent } from './core/layout/sidebar/components/menu/menu.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -37,20 +37,18 @@ import { CardComponent } from './shared/components/card/card.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
+    TranslatePipe
+  ],
+  providers: [
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: './assets/i18n/',
+        suffix: '.json',
+        failOnError: true
+      })
     })
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-// AOT compilation support
-export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}

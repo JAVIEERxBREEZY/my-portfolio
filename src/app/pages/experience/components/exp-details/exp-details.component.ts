@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ICompaniesCard } from 'src/app/core/models/interfaces/companies-card.interface';
 import { FADE_IN_OUT } from 'src/app/shared/animations/fade-in-out.animation';
 
@@ -8,6 +8,7 @@ import { FADE_IN_OUT } from 'src/app/shared/animations/fade-in-out.animation';
     templateUrl: './exp-details.component.html',
     styleUrls: ['./exp-details.component.scss'],
     animations: [FADE_IN_OUT],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ExpDetailsComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { IDropdownPosition, IDropdownListItem } from '../../../core/models/interfaces/dropdown-list.interface';
 import { Lang } from 'src/app/core/models/types/lang.type';
 
@@ -6,6 +6,7 @@ import { Lang } from 'src/app/core/models/types/lang.type';
     selector: 'jav-dropdown-list',
     templateUrl: './dropdown-list.component.html',
     styleUrls: ['./dropdown-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropdownListComponent implements OnInit {

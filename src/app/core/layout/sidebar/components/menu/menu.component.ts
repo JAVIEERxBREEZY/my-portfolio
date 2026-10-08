@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { IMenuItem } from 'src/app/core/models/interfaces/menu-item.interface';
 import { NavigationEnd, Router } from '@angular/router';
 import { MENU_ITEMS } from 'src/app/core/models/constants/menu-items.constants';
@@ -7,6 +7,7 @@ import { SidebarStatusService } from 'src/app/shared/services/sidebar-status.ser
 @Component({
     selector: 'jav-menu',
     templateUrl: './menu.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MenuComponent implements OnInit {
