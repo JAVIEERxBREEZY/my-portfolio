@@ -1,5 +1,7 @@
+@use "sass:map";
+
 @use "../settings/variables" as v;
 
 .ti-cursor {
-  color: map-get(v.$color-map, "white") !important;
+  color: map.get(v.$color-map, "white") !important;
 }

@@ -3,9 +3,10 @@ import { IDropdownPosition, IDropdownListItem } from '../../../core/models/inter
 import { Lang } from 'src/app/core/models/types/lang.type';
 
 @Component({
-  selector: 'jav-dropdown-list',
-  templateUrl: './dropdown-list.component.html',
-  styleUrls: ['./dropdown-list.component.scss']
+    selector: 'jav-dropdown-list',
+    templateUrl: './dropdown-list.component.html',
+    styleUrls: ['./dropdown-list.component.scss'],
+    standalone: false
 })
 export class DropdownListComponent implements OnInit {
 

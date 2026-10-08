@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @use "../../../scss/settings/variables" as v;
 @use "../../../scss/tools/media-queries" as mq;
 
@@ -44,7 +46,7 @@ $c: #{v.$prefix} + "contact";
     }
 
     .bi {
-      color: map-get($map: v.$color-map, $key: "white");
+      color: map.get($map: v.$color-map, $key: "white");
       font-size: 50px;
     }
   }

@@ -1,8 +1,10 @@
+@use "sass:map";
+
 @use "../settings/variables" as v;
 
 .c-btn {
 
-    background-color: map-get($map: v.$color-map, $key: "white");
+    background-color: map.get($map: v.$color-map, $key: "white");
     border: 1px solid;
     border-radius: 24px;
     font-size: 16px;
@@ -18,33 +20,33 @@
 
         @extend .c-btn;
 
-        border-color: map-get($map: v.$color-map, $key: "linkedin1");
-        color: map-get($map: v.$color-map, $key: "linkedin1");
+        border-color: map.get($map: v.$color-map, $key: "linkedin1");
+        color: map.get($map: v.$color-map, $key: "linkedin1");
 
         &:hover {
-            box-shadow: inset 0 0 0 1px map-get($map: v.$color-map, $key: "linkedin1");
+            box-shadow: inset 0 0 0 1px map.get($map: v.$color-map, $key: "linkedin1");
         }
     }
 
     &--github {
         @extend .c-btn;
 
-        border-color: map-get($map: v.$color-map, $key: "dark-secondary");
-        color: map-get($map: v.$color-map, $key: "dark-secondary");
+        border-color: map.get($map: v.$color-map, $key: "dark-secondary");
+        color: map.get($map: v.$color-map, $key: "dark-secondary");
 
         &:hover {
-            box-shadow: inset 0 0 0 1px map-get($map: v.$color-map, $key: "dark-secondary");
+            box-shadow: inset 0 0 0 1px map.get($map: v.$color-map, $key: "dark-secondary");
         }
     }
 
     &--yt {
         @extend .c-btn;
 
-        border-color: map-get($map: v.$color-map, $key: "youtube1");
-        color: map-get($map: v.$color-map, $key: "youtube1");
+        border-color: map.get($map: v.$color-map, $key: "youtube1");
+        color: map.get($map: v.$color-map, $key: "youtube1");
 
         &:hover {
-            box-shadow: inset 0 0 0 1px map-get($map: v.$color-map, $key: "youtube1");
+            box-shadow: inset 0 0 0 1px map.get($map: v.$color-map, $key: "youtube1");
         }
     }
 }

@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @use "../../../scss/settings/variables" as v;
 @use "../../../scss/tools/media-queries" as mq;
 
@@ -28,7 +30,7 @@ $c: #{v.$prefix} + "home";
     margin-top: 50px;
 
     a {
-      color: map-get($map: v.$color-map, $key: "white");
+      color: map.get($map: v.$color-map, $key: "white");
       font-size: v.$fs-24;
     }
   }

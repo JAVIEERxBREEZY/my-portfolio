@@ -4,7 +4,10 @@ import { Component, Pipe, PipeTransform } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 /** Mock del pipe de traducciones: devuelve la misma key  */
-@Pipe({ name: 'translate' })
+@Pipe({
+    name: 'translate',
+    standalone: false
+})
 class MockTranslatePipe implements PipeTransform {
     transform(value: any): any { return value; }
 }

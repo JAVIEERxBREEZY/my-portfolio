@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'jav-page-title',
-  templateUrl: './page-title.component.html'
+    selector: 'jav-page-title',
+    templateUrl: './page-title.component.html',
+    standalone: false
 })
 export class PageTitleComponent {
 

@@ -1,8 +1,10 @@
+@use "sass:map";
+
 @use "../settings/variables" as v;
 
 .e-tag {
 
-  --comp3: #{map-get($map: v.$color-map, $key: "comp3")};
+  --comp3: #{map.get($map: v.$color-map, $key: "comp3")};
 
   border-radius: 10px;
   cursor: default;
@@ -11,7 +13,7 @@
   padding: 4px 6px;
 
   &.info {
-    background-color: map-get($map: v.$color-map, $key: "white");
+    background-color: map.get($map: v.$color-map, $key: "white");
     border: 1px solid var(--comp3);
     color: var(--comp3);
   }

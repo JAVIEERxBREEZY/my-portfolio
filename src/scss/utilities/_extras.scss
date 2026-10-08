@@ -1,9 +1,11 @@
+@use "sass:map";
+
 $gap-map: ( "4" : 4px,"8" : 8px, "14": 14px);
 
-$gap-keys: map-keys($map: $gap-map);
+$gap-keys: map.keys($map: $gap-map);
 
 @each $gap in $gap-keys {
-  $value: map-get($map: $gap-map, $key: $gap);
+  $value: map.get($map: $gap-map, $key: $gap);
   .u-gap-#{$gap} {
     gap: $value;
   }

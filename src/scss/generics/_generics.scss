@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @use "../settings/variables" as v;
 
 // GENERIC APP STYLES
@@ -7,7 +9,7 @@ html {
 }
 
 body {
-  background-color: map-get($map: v.$color-map, $key: "dark-tertiary");
+  background-color: map.get($map: v.$color-map, $key: "dark-tertiary");
 }
 
 p {
@@ -19,5 +21,5 @@ header, section, div, footer {
 }
 
 p, h2, h3 {
-  color: map-get($map: v.$color-map, $key: "white");
+  color: map.get($map: v.$color-map, $key: "white");
 }

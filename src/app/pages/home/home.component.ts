@@ -6,9 +6,10 @@ import { ITypeitText } from './interfaces/typeit-text.interface';
 import { TYPEIT_ES, TYPEIT_EN, DELETE_EN, DELETE_ES } from './constants/typeit.constants';
 
 @Component({
-  selector: 'jav-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'jav-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 

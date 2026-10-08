@@ -2,9 +2,10 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { ICompaniesCard } from 'src/app/core/models/interfaces/companies-card.interface';
 
 @Component({
-  selector: 'jav-company-card',
-  templateUrl: './company-card.component.html',
-  styleUrls: ['./company-card.component.scss']
+    selector: 'jav-company-card',
+    templateUrl: './company-card.component.html',
+    styleUrls: ['./company-card.component.scss'],
+    standalone: false
 })
 export class CompanyCardComponent implements OnInit {
 

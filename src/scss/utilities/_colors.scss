@@ -1,10 +1,12 @@
+@use "sass:map";
+
 @use "../settings/variables" as v;
 
-$color-keys: map-keys($map: v.$color-map);
+$color-keys: map.keys($map: v.$color-map);
 
 @each $color in $color-keys {
 
-  $value: map-get($map: v.$color-map, $key: $color);
+  $value: map.get($map: v.$color-map, $key: $color);
 
   .u-color-#{$color} {
     color: $value;

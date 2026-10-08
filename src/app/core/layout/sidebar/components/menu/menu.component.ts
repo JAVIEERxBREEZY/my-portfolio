@@ -5,8 +5,9 @@ import { MENU_ITEMS } from 'src/app/core/models/constants/menu-items.constants';
 import { SidebarStatusService } from 'src/app/shared/services/sidebar-status.service';
 
 @Component({
-  selector: 'jav-menu',
-  templateUrl: './menu.component.html'
+    selector: 'jav-menu',
+    templateUrl: './menu.component.html',
+    standalone: false
 })
 export class MenuComponent implements OnInit {
 

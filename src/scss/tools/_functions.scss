@@ -1,5 +1,7 @@
+@use "sass:meta";
+
 // FUNCIONES
 
 @function is-type($var, $type) {
-  @return type-of($var) == $type;
+  @return meta.type-of($var) == $type;
 }

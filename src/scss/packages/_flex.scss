@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $justify: (
     "c" : center,
     "s" : start,
@@ -7,7 +9,7 @@ $justify: (
     "i"  : initial,
 );
 
-$justify-keys: map-keys($justify);
+$justify-keys: map.keys($justify);
 
 $align: (
     "c" : center,
@@ -16,15 +18,15 @@ $align: (
     "i" : initial,
 );
 
-$align-keys: map-keys($align);
+$align-keys: map.keys($align);
 
 .p-flex {
   @each $a in $align-keys {
       &#{$a} {
-          $ver: map-get($align, $a);
+          $ver: map.get($align, $a);
           @each $j in $justify-keys {
               &#{$j} {
-                  $hor: map-get($justify, $j);
+                  $hor: map.get($justify, $j);
                   display: flex;
                   align-items: $ver;
                   justify-content: $hor;

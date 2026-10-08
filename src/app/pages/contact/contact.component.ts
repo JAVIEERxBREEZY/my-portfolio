@@ -5,9 +5,10 @@ import { CARD_DATA } from 'src/app/core/models/constants/card-content.constants'
 import { AppOverflowService } from 'src/app/core/services/app-overflow.service';
 
 @Component({
-  selector: 'jav-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+    selector: 'jav-contact',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.scss'],
+    standalone: false
 })
 export class ContactComponent implements OnInit, OnDestroy {
 

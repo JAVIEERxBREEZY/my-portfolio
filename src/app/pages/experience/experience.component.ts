@@ -4,9 +4,10 @@ import { ICompaniesCard } from 'src/app/core/models/interfaces/companies-card.in
 import { AppOverflowService } from 'src/app/core/services/app-overflow.service';
 
 @Component({
-  selector: 'jav-experience',
-  templateUrl: './experience.component.html',
-  styleUrls: ['./experience.component.scss']
+    selector: 'jav-experience',
+    templateUrl: './experience.component.html',
+    styleUrls: ['./experience.component.scss'],
+    standalone: false
 })
 export class ExperienceComponent implements OnInit, OnDestroy {
 

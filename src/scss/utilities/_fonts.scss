@@ -1,10 +1,12 @@
+@use "sass:map";
+
 @use "../settings/variables" as v;
 
-$font-sizes-keys: map-keys($map: v.$font-sizes-map);
+$font-sizes-keys: map.keys($map: v.$font-sizes-map);
 
 @each $font in $font-sizes-keys {
 
-  $value: map-get($map: v.$font-sizes-map, $key: $font);
+  $value: map.get($map: v.$font-sizes-map, $key: $font);
 
   .u-fs-#{$font} {
     font-size: $value;

@@ -4,10 +4,11 @@ import { FADE_IN_OUT } from 'src/app/shared/animations/fade-in-out.animation';
 
 
 @Component({
-  selector: 'jav-exp-details',
-  templateUrl: './exp-details.component.html',
-  styleUrls: ['./exp-details.component.scss'],
-  animations: [ FADE_IN_OUT ]
+    selector: 'jav-exp-details',
+    templateUrl: './exp-details.component.html',
+    styleUrls: ['./exp-details.component.scss'],
+    animations: [FADE_IN_OUT],
+    standalone: false
 })
 export class ExpDetailsComponent implements OnInit {
 

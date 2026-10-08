@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $spacing-map: (
   "0" : 0,
   "1" : 4px,
@@ -6,10 +8,10 @@ $spacing-map: (
   "4" : 20px
 );
 
-$spacing-keys: map-keys($map: $spacing-map);
+$spacing-keys: map.keys($map: $spacing-map);
 
 @each $spa in $spacing-keys {
-  $value: map-get($map: $spacing-map, $key: $spa);
+  $value: map.get($map: $spacing-map, $key: $spa);
 
   .u-m-#{$spa} {
     margin: $value;

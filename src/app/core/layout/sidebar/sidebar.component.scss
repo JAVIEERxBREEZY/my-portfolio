@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @use "../../../../scss/settings/variables" as v;
 @use "../../../../scss/tools/mixins" as m;
 @use "../../../../scss/tools/media-queries" as mq;
@@ -6,7 +8,7 @@ $c: v.$prefix + "sidebar";
 
 #{$c} {
 
-  color: map-get($map: v.$color-map, $key: "white");
+  color: map.get($map: v.$color-map, $key: "white");
 
   &__icons {
     @include mq.xs-device {
@@ -17,7 +19,7 @@ $c: v.$prefix + "sidebar";
 
   &__icon {
     &--active {
-      border-left: 2px solid map-get($map: v.$color-map, $key: "white");
+      border-left: 2px solid map.get($map: v.$color-map, $key: "white");
     }
   }
 }
