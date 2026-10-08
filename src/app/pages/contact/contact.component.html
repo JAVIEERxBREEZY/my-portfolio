@@ -1,9 +1,11 @@
 <div class="jav-contact u-w-per-100 u-h-per-100 p-flexcs u-dir-col u-my-4">
   <jav-page-title [title]="'PAGES.CONTACT' | translate" [description]="'CONTACT.DESCRIPTION' | translate"></jav-page-title>
-  
+
   <div class="jav-contact__body p-flexcs u-gap-64 u-fwrap-wrap">
-    <div *ngFor="let item of cards">
-      <jav-card [cardInfo]="item.card" [customColors]="item.colors" [btnType]="item.btnType"></jav-card>
-    </div>
+    @for (item of cards; track item) {
+      <div>
+        <jav-card [cardInfo]="item.card" [customColors]="item.colors" [btnType]="item.btnType"></jav-card>
+      </div>
+    }
   </div>
 </div>

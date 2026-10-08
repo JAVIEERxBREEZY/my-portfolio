@@ -1,11 +1,15 @@
-<div *ngIf="shouldRender" class="jav-home u-w-per-100 u-h-per-100 p-flexcc">
-  <div class="jav-home__messages">
-    <h2 class="jav-home__hi" id="hi-message"></h2>
-    <p class="jav-home__message" id="iam-message"></p>
-    <div *ngIf="textCompleted" class="jav-home__links u-mt-4 p-flexcb">
-      <a class="u-text-underline" href="/cv"> {{ 'PAGES.CV' | translate }} </a>
-      <a class="u-text-underline" href="/contact"> {{ 'PAGES.CONTACT' | translate }} </a>
+@if (shouldRender) {
+  <div class="jav-home u-w-per-100 u-h-per-100 p-flexcc">
+    <div class="jav-home__messages">
+      <h2 class="jav-home__hi" id="hi-message"></h2>
+      <p class="jav-home__message" id="iam-message"></p>
+      @if (textCompleted) {
+        <div class="jav-home__links u-mt-4 p-flexcb">
+          <a class="u-text-underline" href="/cv"> {{ 'PAGES.CV' | translate }} </a>
+          <a class="u-text-underline" href="/contact"> {{ 'PAGES.CONTACT' | translate }} </a>
+        </div>
+      }
     </div>
   </div>
-</div>
+}
 

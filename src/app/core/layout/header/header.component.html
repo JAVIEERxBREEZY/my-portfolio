@@ -6,9 +6,11 @@
     <li class="jav-header__menu" (click)="switchSidebarStatus(!sidebarActive)">
       <i class="bi bi-list u-fs-20 u-color-white"></i>
     </li>
-    <li *ngFor="let item of listItems" class="jav-header__option u-ms-3 u-color-text-primary">
-      {{ item |translate }}
-    </li>
+    @for (item of listItems; track item) {
+      <li class="jav-header__option u-ms-3 u-color-text-primary">
+        {{ item |translate }}
+      </li>
+    }
   </ul>
   <p class="jav-header__state u-color-text-primary u-fs-14 u-w-per-100 p-flexcc">
     Javier Sanz - {{ 'PAGES.' + activeRoute | translate }} - Visual Studio Code
@@ -21,10 +23,12 @@
       </div>
       <i class="jav-header__ichevron bi bi-chevron-down u-color-white" [class.u-rotate-180]="showLangList"></i>
     </div>
-    <jav-dropdown-list *ngIf="showLangList"
-      [position]="flagsPosition" [items]="flagsList"
-      (itemSelected)="switchLanguage($event)" (clickOutside)="checkClickLang($event)"
-    ></jav-dropdown-list>
+    @if (showLangList) {
+      <jav-dropdown-list
+        [position]="flagsPosition" [items]="flagsList"
+        (itemSelected)="switchLanguage($event)" (clickOutside)="checkClickLang($event)"
+      ></jav-dropdown-list>
+    }
   </div>
 
 </header>

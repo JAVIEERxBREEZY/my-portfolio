@@ -5,9 +5,11 @@
       <h3 class="u-fs-24"> {{ 'CV.EXPERIENCE' | translate }} </h3>
     </div>
     <div class="u-w-per-100 p-flexss u-fwrap-wrap">
-      <div *ngFor="let comp of companies" class="jav-cv__card u-mb-4 p-flexcc">
-        <jav-company-card [data]="comp" ></jav-company-card>
-      </div>
+      @for (comp of companies; track comp) {
+        <div class="jav-cv__card u-mb-4 p-flexcc">
+          <jav-company-card [data]="comp" ></jav-company-card>
+        </div>
+      }
     </div>
   </section>
 </div>

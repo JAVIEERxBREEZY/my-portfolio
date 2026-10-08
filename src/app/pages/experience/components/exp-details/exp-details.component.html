@@ -14,13 +14,15 @@
     </div>
   </section>
   <!-- #endregion -->
-   <!-- #region TAGS -->
-    <section class="jav-exp-details__techs u-w-per-100 p-flexcs u-fwrap-wrap u-gap-8 u-mb-3">
-      <span *ngFor="let tag of data.techs" class="e-tag info">
+  <!-- #region TAGS -->
+  <section class="jav-exp-details__techs u-w-per-100 p-flexcs u-fwrap-wrap u-gap-8 u-mb-3">
+    @for (tag of data.techs; track tag) {
+      <span class="e-tag info">
         {{ tag }}
       </span>
-    </section>
-   <!-- #endregion -->
+    }
+  </section>
+  <!-- #endregion -->
   <!-- #region DESCRIPTION -->
   <section class="jav-exp-details__description u-w-per-100">
     <p class="u-fs-16 u-color-dark-primary" [innerHTML]="data.description | translate"></p>
