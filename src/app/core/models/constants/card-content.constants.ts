@@ -17,11 +17,11 @@ export const CARD_DATA: { card: ICard; colors: ICardColors, btnType: string }[] 
   },
   {
     card: {
-      image: 'assets/images/profiles/github-profile.jpeg',
+      image: 'assets/images/profiles/github-profile.jpg',
       icon : 'bi-github',
-      name: 'JavierSR99',
+      name: 'JAVIEERxBREEZY',
       description: 'CARDS.GITHUB.DESCRIPTION',
-      link: 'https://github.com/JavierSR99'
+      link: 'https://github.com/JAVIEERxBREEZY'
     },
     colors: {
       header : '#1E1F1C', content : '#FFF', icon : '#FFF'
@@ -30,7 +30,7 @@ export const CARD_DATA: { card: ICard; colors: ICardColors, btnType: string }[] 
   },
   {
     card : {
-      image : 'assets/images/profiles/logo-yt.jpg',
+      image : 'assets/images/profiles/youtube-profile.jpg',
       icon : 'bi-youtube',
       name : 'Código JS',
       description : 'CARDS.YOUTUBE.DESCRIPTION',
