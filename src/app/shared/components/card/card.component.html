@@ -1,14 +1,16 @@
 <div class="c-card">
-    <div class="c-card__header" [class.p-flexcs]="cardInfo.title != ''"  [ngStyle]="{ 'background-color' : customColors.header}">
-        <i class="bi u-me-2" [ngClass]="cardInfo.icon" [ngStyle]="{ 'color' : customColors.icon}"></i>
-        <p *ngIf="cardInfo.title"> {{ cardInfo.title }} </p>
-    </div>
-    <div class="c-card__content" [ngStyle]="{ 'background-color' : customColors.content}">
-        <img class="c-card__img" [src]="cardInfo.image" alt="card-image" loading="lazy">
-        <h3 class="c-card__name"> {{ cardInfo.name }} </h3>
-        <h4 class="c-card__description"> {{ cardInfo.description | translate }} </h4>
-        <a class="c-card__link" [class]="btnType" [href]="cardInfo.link" target="_blank">
-            {{ 'BTNS.SEE_PROFILE' | translate }}
-        </a>
-    </div>
+  <div class="c-card__header" [class.p-flexcs]="cardInfo().title != ''"  [ngStyle]="{ 'background-color' : customColors().header}">
+    <i class="bi u-me-2" [ngClass]="cardInfo().icon" [ngStyle]="{ 'color' : customColors().icon}"></i>
+    @if (cardInfo().title) {
+      <p> {{ cardInfo().title }} </p>
+    }
+  </div>
+  <div class="c-card__content" [ngStyle]="{ 'background-color' : customColors().content}">
+    <img class="c-card__img" [src]="cardInfo().image" alt="card-image" loading="lazy">
+    <h3 class="c-card__name"> {{ cardInfo().name }} </h3>
+    <h4 class="c-card__description"> {{ cardInfo().description | translate }} </h4>
+    <a class="c-card__link" [class]="btnType()" [href]="cardInfo().link" target="_blank">
+      {{ 'BTNS.SEE_PROFILE' | translate }}
+    </a>
+  </div>
 </div>

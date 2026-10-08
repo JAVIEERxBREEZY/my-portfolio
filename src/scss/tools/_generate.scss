@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // MIXINS PARA GENERAR UTILIDADES
 // NO SE INCLUYEN EN LOS @USE DE LA ITCSS
 
@@ -10,10 +12,10 @@
 */
 @mixin generate-simple-utility($map, $prop, $label) {
   @if (f.is-type($map, "map")) {
-    $keys: map-keys($map: $map);
+    $keys: map.keys($map: $map);
 
     @each $key in $keys {
-      $value: map-get($map, $key);
+      $value: map.get($map, $key);
 
       .u-#{$label}-#{$key} {
         #{$prop}: $value !important;
@@ -31,19 +33,19 @@
   // VALIDAMOS QUE LOS MAPAS SEAN CORRECTOS
   @if (f.is-type($first-map, "map") and f.is-type($second-map, "map")) {
 
-    $first-keys: map-keys($map: $first-map);
-    $second-keys: map-keys($map: $second-map);
+    $first-keys: map.keys($map: $first-map);
+    $second-keys: map.keys($map: $second-map);
 
     // RECORREMOS EL PRIMER MAPA
     @each $first in $first-keys {
-      $first-value: map-get($first-map, $first);
+      $first-value: map.get($first-map, $first);
 
       // RECORREMOS EL SEGUNDO MAPA
       @each $second in $second-keys {
-        $second-value: map-get($second-map, $second);
+        $second-value: map.get($second-map, $second);
 
         .u-#{$label}-#{$first}-#{$second} {
-          $value: map-get($first-map, $first) + ' ' + map-get($second-map, $second);
+          $value: map.get($first-map, $first) + ' ' + map.get($second-map, $second);
           #{$prop}: $value !important;
         }
       }
@@ -60,10 +62,10 @@
 */
 @mixin generate-double-property-utility ($map, $first-prop, $second-prop, $label) {
   @if (f.is-type($map, "map")) {
-    $keys: map-keys($map: $map);
+    $keys: map.keys($map: $map);
 
     @each $key in $keys {
-      $value: map-get($map, $key);
+      $value: map.get($map, $key);
 
       .u-#{$label}-#{$key} {
         #{$first-prop}: $value !important;
@@ -81,14 +83,14 @@
 */
 @mixin generate-dynamic-property-utility ($map, $measures, $prop, $label) {
   @if (f.is-type($map, "map") and f.is-type($measures, "map")) {
-    $keys: map-keys($map: $map);
-    $measure-keys: map-keys($map: $measures);
+    $keys: map.keys($map: $map);
+    $measure-keys: map.keys($map: $measures);
 
     @each $mea in $measure-keys {
-      $mea-value: map-get($measures, $mea);
+      $mea-value: map.get($measures, $mea);
 
       @each $key in $keys {
-        $value: map-get($map, $key);
+        $value: map.get($map, $key);
 
         .u-#{$label}-#{$mea}-#{$key} {
           #{$prop}: #{$value + $mea-value} !important;

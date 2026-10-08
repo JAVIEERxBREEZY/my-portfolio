@@ -8,7 +8,6 @@ export class SidebarStatusService {
 
   public sidebarActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
 
   getSidebarActive() {
     return this.sidebarActive$.asObservable();

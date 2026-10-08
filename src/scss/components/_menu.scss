@@ -1,6 +1,8 @@
-@use "~/src/scss/settings/variables" as v;
-@use "~/src/scss/tools/mixins" as m;
-@use "~/src/scss/tools/media-queries" as mq;
+@use "sass:map";
+
+@use "../settings/variables" as v;
+@use "../tools/mixins" as m;
+@use "../tools/media-queries" as mq;
 
 .c-menu {
   &__link {
@@ -13,7 +15,7 @@
     }
 
     &--active {
-      background-color: map-get(v.$color-map, "dark-hover-primary");
+      background-color: map.get(v.$color-map, "dark-hover-primary");
     }
   }
 }

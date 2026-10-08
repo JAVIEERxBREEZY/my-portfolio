@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 class TranslateServiceMock {
   addLangs = jasmine.createSpy('addLangs');
   getBrowserLang = jasmine.createSpy('getBrowserLang');
-  setDefaultLang = jasmine.createSpy('setDefaultLang');
+  setFallbackLang = jasmine.createSpy('setFallbackLang');
   use = jasmine.createSpy('use');
 }
 
@@ -76,7 +76,7 @@ describe('LanguageService', () => {
     service.setInitialLanguage();
 
     expect(_ts.addLangs).toHaveBeenCalled();
-    expect(_ts.setDefaultLang).toHaveBeenCalledWith('es');
+    expect(_ts.setFallbackLang).toHaveBeenCalledWith('es');
     expect(_ts.use).toHaveBeenCalledWith('es');
     expect(service.activeLanguage).toBe('es');
   });
@@ -96,7 +96,7 @@ describe('LanguageService', () => {
 
     service.setInitialLanguage();
 
-    expect(_ts.setDefaultLang).toHaveBeenCalledWith('en');
+    expect(_ts.setFallbackLang).toHaveBeenCalledWith('en');
     expect(_ts.use).toHaveBeenCalledWith('en');
     expect(service.activeLanguage).toBe('en');
 
@@ -108,7 +108,7 @@ describe('LanguageService', () => {
 
     service.setInitialLanguage();
 
-    expect(_ts.setDefaultLang).toHaveBeenCalledWith('es');
+    expect(_ts.setFallbackLang).toHaveBeenCalledWith('es');
     expect(_ts.use).toHaveBeenCalledWith('es');
     expect(service.activeLanguage).toBe('es');
 
@@ -135,7 +135,7 @@ describe('LanguageService', () => {
     const next = await nextValuePromise;
     expect(next).toBe('en');
 
-    expect(_ts.setDefaultLang).toHaveBeenCalledWith('en');
+    expect(_ts.setFallbackLang).toHaveBeenCalledWith('en');
     expect(_ts.use).toHaveBeenCalledWith('en');
     expect(localStorage.setItem).toHaveBeenCalledWith(LANG_KEY, 'en');
     expect(document.documentElement.setAttribute).toHaveBeenCalledWith('lang', 'en');
@@ -170,7 +170,7 @@ describe('LanguageService', () => {
     expect(document.documentElement.setAttribute).not.toHaveBeenCalled();
 
     // Aun así, TranslateService se alinea correctamente
-    expect(_ts2.setDefaultLang).toHaveBeenCalled();
+    expect(_ts2.setFallbackLang).toHaveBeenCalled();
     expect(_ts2.use).toHaveBeenCalled();
   });
 

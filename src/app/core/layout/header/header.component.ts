@@ -1,19 +1,28 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { IDropdownListItem, IDropdownPosition } from 'src/app/core/models/interfaces/dropdown-list.interface';
 import { Subscription } from 'rxjs';
 import { SidebarStatusService } from 'src/app/shared/services/sidebar-status.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Lang } from '../../models/types/lang.type';
 import { SUPPORTED_LANGS } from '../../models/types/lang.type';
+import { DropdownListComponent } from '../../../shared/components/dropdown-list/dropdown-list.component';
 
 @Component({
-  selector: 'jav-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'jav-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [DropdownListComponent, TranslatePipe]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  private readonly _ls = inject(LanguageService);
+  private readonly _ts = inject(TranslateService);
+  private readonly _sss = inject(SidebarStatusService);
+  private readonly _router = inject(Router);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
 
     // #region VIEWCHILD, HOSTLISTENER
     @ViewChild('flagSection') flagSection!: ElementRef;
@@ -47,13 +56,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private listObservers$: Array<Subscription> = [];
   // #endregion
-  
-  // #region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor(private _ls: LanguageService, private _ts: TranslateService,
-    private _sss: SidebarStatusService,
-    private _router: Router
-  ) {}
 
+  // #region LIFECYCLE HOOKS
   ngOnInit(): void {
     const observableLang$ = this.getInitialLang();
     const observableRoute$ = this.getActiveRoute();
@@ -71,9 +75,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public getInitialLang(): Subscription {
     return this._ls.activeLanguage$.subscribe((res) => {
       this.activeLang = res;
+      this._cdr.markForCheck();
     },
     err => {
       this.activeLang = 'es';
+      this._cdr.markForCheck();
     });
   }
 
@@ -92,6 +98,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.activeRoute = 'CONTACT';
             break;
         }
+        this._cdr.markForCheck();
       }
     });
   }
@@ -114,6 +121,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private suscribeToSidebarStatusService(): Subscription {
     return this._sss.getSidebarActive().subscribe((isActive: boolean) => {
       this.sidebarActive = isActive;
+      this._cdr.markForCheck();
     });
   }
 

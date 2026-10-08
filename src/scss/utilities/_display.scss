@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // DISPLAY UTILITIES
 $display-map: (
     "flex" : flex,
@@ -5,10 +7,10 @@ $display-map: (
     "none" : none,
 );
 
-$display-keys: map-keys($display-map);
+$display-keys: map.keys($display-map);
 
 @each $ds in $display-keys {
-    $value: map-get($display-map, $ds);
+    $value: map.get($display-map, $ds);
 
     .u-ds-#{$ds} {
         display: $value;

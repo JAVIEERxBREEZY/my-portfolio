@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @use "../settings/variables" as v;
 
 // MIXINS
@@ -14,7 +16,7 @@
 }
 
 @mixin hover-dark-primary($radius: 5px) {
-  @include hover-bg(map-get(v.$color-map, "dark-hover-primary"));
+  @include hover-bg(map.get(v.$color-map, "dark-hover-primary"));
 
   border-radius: $radius;
   cursor: pointer;

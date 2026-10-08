@@ -1,10 +1,15 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ChangeDetectionStrategy, input } from '@angular/core';
 import { ICompaniesCard } from 'src/app/core/models/interfaces/companies-card.interface';
+import { ModalLayoutComponent } from '../../../../shared/components/modal-layout/modal-layout.component';
+import { ExpDetailsComponent } from '../exp-details/exp-details.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'jav-company-card',
-  templateUrl: './company-card.component.html',
-  styleUrls: ['./company-card.component.scss']
+    selector: 'jav-company-card',
+    templateUrl: './company-card.component.html',
+    styleUrls: ['./company-card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ModalLayoutComponent, ExpDetailsComponent, TranslatePipe]
 })
 export class CompanyCardComponent implements OnInit {
 
@@ -15,13 +20,13 @@ export class CompanyCardComponent implements OnInit {
   // #endregion
 
   // #region INPUTS & OUTPUTS
-  @Input() data: ICompaniesCard = {
+  readonly data = input<ICompaniesCard>({
     title: '',
     logo: '',
     description: '',
     timeline : '',
     techs : []
-  };
+  });
   // #endregion
 
   // #region VARIABLES
@@ -31,7 +36,6 @@ export class CompanyCardComponent implements OnInit {
   // #endregion
 
   // #region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor() { }
 
   ngOnInit(): void {
     this.setModalSizeResponsive();

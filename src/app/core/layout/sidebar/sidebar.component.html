@@ -1,9 +1,11 @@
 <div class="jav-sidebar u-w-per-100 u-h-per-100 u-ds-flex">
   <div class="jav-sidebar__icons u-w-content u-h-per-100 u-bg-dark-primary">
     <ul>
-      <li *ngFor="let icon of icons; first as f" class="jav-sidebar__icon u-p-2" [class.jav-sidebar__icon--active]="f">
-        <i [ngClass]="'bi-' + icon" class="bi u-color-white u-fs-24"></i>
-      </li>
+      @for (icon of icons; track icon; let f = $first) {
+        <li class="jav-sidebar__icon u-p-2" [class.jav-sidebar__icon--active]="f">
+          <i [ngClass]="'bi-' + icon" class="bi u-color-white u-fs-24"></i>
+        </li>
+      }
     </ul>
   </div>
   <div class="jav-sidebar__menu u-w-per-100 u-bg-dark-secondary u-index-3">

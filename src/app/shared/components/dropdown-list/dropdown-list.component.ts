@@ -1,26 +1,29 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, ElementRef, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { IDropdownPosition, IDropdownListItem } from '../../../core/models/interfaces/dropdown-list.interface';
 import { Lang } from 'src/app/core/models/types/lang.type';
+import { NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'jav-dropdown-list',
-  templateUrl: './dropdown-list.component.html',
-  styleUrls: ['./dropdown-list.component.scss']
+    selector: 'jav-dropdown-list',
+    templateUrl: './dropdown-list.component.html',
+    styleUrls: ['./dropdown-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgStyle]
 })
 export class DropdownListComponent implements OnInit {
 
   // #region INPUTS
-  @Input() items: IDropdownListItem[] = [];
-  @Input() position: IDropdownPosition = {};
+  readonly items = input<IDropdownListItem[]>([]);
+  readonly position = input<IDropdownPosition>({});
   // #endregion
 
   // #region OUTPUTS
-  @Output() itemSelected = new EventEmitter<Lang>();
+  readonly itemSelected = output<Lang>();
   onItemSelected(value: Lang) {
     this.itemSelected.emit(value);
   }
 
-  @Output() clickOutside = new EventEmitter<boolean>();
+  readonly clickOutside = output<boolean>();
   // #endregion
 
   // #region VIEWCHILD, HOSTLISTENER
@@ -34,7 +37,6 @@ export class DropdownListComponent implements OnInit {
   }
   // #endregion
 
-  constructor() { }
 
   ngOnInit(): void {
   }

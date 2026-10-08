@@ -1,13 +1,21 @@
 <ul class="c-menu u-w-per-100">
-  <li *ngFor="let item of menuItems" class="p-flexcs u-gap-4 u-mb-2"
-    [class.u-ps-4]="item.type === 1" [class.c-menu__link--active]="activeRoute === item.link"
-    [class.c-menu__link]="item.link" [ngClass]="item.type === 0 ? 'c-menu__item--parent' : 'c-menu__item--child'"
-    (click)="goToRoute(item); closeSidebar()"
-  >
-    <i *ngIf="item.type === 0" class="bi"
-      [ngClass]="item.parentOpen === true ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
-    <i class="bi" [ngClass]="'bi-' + item.icon"></i>
-    <p *ngIf="!item.link" class="u-fs-12"> {{ item.label }} </p>
-    <p *ngIf="item.link" class="u-fs-16"> {{ 'PAGES.' + item.label | translate }} </p>
-  </li>
+  @for (item of menuItems; track item) {
+    <li class="p-flexcs u-gap-4 u-mb-2"
+      [class.u-ps-4]="item.type === 1" [class.c-menu__link--active]="activeRoute === item.link"
+      [class.c-menu__link]="item.link" [ngClass]="item.type === 0 ? 'c-menu__item--parent' : 'c-menu__item--child'"
+      (click)="goToRoute(item); closeSidebar()"
+      >
+      @if (item.type === 0) {
+        <i class="bi"
+        [ngClass]="item.parentOpen === true ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
+      }
+      <i class="bi" [ngClass]="'bi-' + item.icon"></i>
+      @if (!item.link) {
+        <p class="u-fs-12"> {{ item.label }} </p>
+      }
+      @if (item.link) {
+        <p class="u-fs-16"> {{ 'PAGES.' + item.label | translate }} </p>
+      }
+    </li>
+  }
 </ul>

@@ -1,33 +1,35 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { ICompaniesCard } from 'src/app/core/models/interfaces/companies-card.interface';
 import { FADE_IN_OUT } from 'src/app/shared/animations/fade-in-out.animation';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
-  selector: 'jav-exp-details',
-  templateUrl: './exp-details.component.html',
-  styleUrls: ['./exp-details.component.scss'],
-  animations: [ FADE_IN_OUT ]
+    selector: 'jav-exp-details',
+    templateUrl: './exp-details.component.html',
+    styleUrls: ['./exp-details.component.scss'],
+    animations: [FADE_IN_OUT],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [TranslatePipe]
 })
 export class ExpDetailsComponent implements OnInit {
 
   // #region INPUTS & OUTPUTS
-  @Input() data: ICompaniesCard = {
+  readonly data = input<ICompaniesCard>({
     title: '',
     logo: '',
     description: '',
-    timeline : '',
-    techs : []
-  };
+    timeline: '',
+    techs: []
+  });
 
-  @Output() closeDetails = new EventEmitter<boolean>();
+  readonly closeDetails = output<boolean>();
   userClickClose(value: boolean): void {
     this.closeDetails.emit(value);
   }
   // #endregion
 
   // #region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor() { }
 
   ngOnInit(): void {
   }

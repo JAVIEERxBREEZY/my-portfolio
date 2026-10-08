@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardComponent } from './card.component';
-import { Component, Pipe, PipeTransform } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { Pipe, PipeTransform } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 /** Mock del pipe de traducciones: devuelve la misma key  */
 @Pipe({ name: 'translate' })
@@ -15,7 +15,10 @@ describe('CardComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [CardComponent, MockTranslatePipe]
+            imports: [CardComponent]
+        }).overrideComponent(CardComponent, {
+            remove: { imports: [TranslatePipe] },
+            add: { imports: [MockTranslatePipe] }
         }).compileComponents();
 
         fixture = TestBed.createComponent(CardComponent);
@@ -32,16 +35,16 @@ describe('CardComponent', () => {
     });
 
     it('should render title and add class "p-flexcs" when title is not empty', () => {
-        component.cardInfo = {
+        fixture.componentRef.setInput('cardInfo', {
             title: 'YouTube',
             image: 'assets/yt.png',
             icon: 'bi-youtube',
             description: 'HOME.YT_DESC',
             name: 'Javier',
             link: 'https://youtube.com/@javier'
-        };
-        component.customColors = { header: '#111', content: '#fafafa' };
-        component.btnType = 'c-btn c-btn--primary';
+        });
+        fixture.componentRef.setInput('customColors', { header: '#111', content: '#fafafa' });
+        fixture.componentRef.setInput('btnType', 'c-btn c-btn--primary');
 
         const host = render();
 
@@ -58,15 +61,15 @@ describe('CardComponent', () => {
     });
 
     it('should not render neither title <p> nor conditional class when title is empty', () => {
-        component.cardInfo = {
+        fixture.componentRef.setInput('cardInfo', {
             title: '',
             image: 'img.png',
             icon: 'bi-github',
             description: 'HOME.GH_DESC',
             name: 'Javier',
             link: 'https://github.com/javier'
-        };
-        component.customColors = { header: 'black', content: 'white' };
+        });
+        fixture.componentRef.setInput('customColors', { header: 'black', content: 'white' });
 
         const host = render();
         const header = host.querySelector('.c-card__header') as HTMLElement;
@@ -77,15 +80,15 @@ describe('CardComponent', () => {
     });
 
     it('should apply icon class and colors if customColors.icon is defined', () => {
-        component.cardInfo = {
+        fixture.componentRef.setInput('cardInfo', {
             title: 'GitHub',
             image: '/assets/gh.png',
             icon: 'bi-github',
             description: 'HOME.GH_DESC',
             name: 'Javier',
             link: 'https://github.com/javier'
-        };
-        component.customColors = { header: '#000', content: '#fff', icon: '#333' };
+        });
+        fixture.componentRef.setInput('customColors', { header: '#000', content: '#fff', icon: '#333' });
 
         const host = render();
         const iconEl = host.querySelector('.c-card__header i') as HTMLElement;
@@ -95,17 +98,43 @@ describe('CardComponent', () => {
         expect(iconEl.style.color).toBe('rgb(51, 51, 51)');
     });
 
+    it('updates rendered content when inputs change after the first render', async () => {
+        const card = {
+            title: 'GitHub', image: '/assets/gh.png', icon: 'bi-github',
+            description: 'First description', name: 'Javier', link: 'https://github.com/javier'
+        };
+        fixture.componentRef.setInput('cardInfo', card);
+        fixture.autoDetectChanges();
+        await fixture.whenStable();
+        const host = fixture.nativeElement as HTMLElement;
+        expect(host.querySelector('.c-card__header p')!.textContent).toContain('GitHub');
+
+        fixture.componentRef.setInput('cardInfo', {
+            ...card, title: '', description: 'Updated description', link: 'https://example.com/profile'
+        });
+        fixture.componentRef.setInput('customColors', { header: '#111', content: '#fafafa' });
+        fixture.componentRef.setInput('btnType', 'c-btn c-btn--ghost');
+        await fixture.whenStable();
+
+        expect(host.querySelector('.c-card__header p')).toBeNull();
+        expect(host.querySelector('.c-card__description')!.textContent).toContain('Updated description');
+        expect(host.querySelector<HTMLElement>('.c-card__header')!.style.backgroundColor).toBe('rgb(17, 17, 17)');
+        const link = host.querySelector<HTMLAnchorElement>('.c-card__link')!;
+        expect(link.href).toBe('https://example.com/profile');
+        expect(link.classList.contains('c-btn--ghost')).toBeTrue();
+    });
+
     it('should bind correctly image, name, description and link', () => {
-        component.cardInfo = {
+        fixture.componentRef.setInput('cardInfo', {
             title: 'LinkedIn',
             image: '/assets/li.png',
             icon: 'bi-linkedin',
             description: 'HOME.LI_DESC',
             name: 'Javier',
             link: 'https://linkedin.com/in/javier'
-        };
-        component.btnType = 'c-btn c-btn--ghost';
-        component.customColors = { header: '#123456', content: '#eeeeee' };
+        });
+        fixture.componentRef.setInput('btnType', 'c-btn c-btn--ghost');
+        fixture.componentRef.setInput('customColors', { header: '#123456', content: '#eeeeee' });
 
         const host = render();
 

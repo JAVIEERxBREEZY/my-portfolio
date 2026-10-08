@@ -1,16 +1,20 @@
 <div
   #dropdownList
   class="c-dropdown u-pos-absolute u-bg-dark-secondary u-p-2"
-  [ngStyle]="position"
->
-  <div *ngFor="let item of items; last as l"
-    class="c-dropdown__item u-p-1 p-flexcs u-gap-8" [class.u-mb-1]="!l"
-    role="button" tabindex="0"
-    (click)="onItemSelected(item.value)" (keyup.enter)="onItemSelected(item.value)"
+  [ngStyle]="position()"
   >
-    <div *ngIf="item.image" class="c-dropdown__img">
-      <img [src]="item.image" [alt]="item.alt" width="100%" height="auto">
+  @for (item of items(); track item; let l = $last) {
+    <div
+      class="c-dropdown__item u-p-1 p-flexcs u-gap-8" [class.u-mb-1]="!l"
+      role="button" tabindex="0"
+      (click)="onItemSelected(item.value)" (keyup.enter)="onItemSelected(item.value)"
+      >
+      @if (item.image) {
+        <div class="c-dropdown__img">
+          <img [src]="item.image" [alt]="item.alt" width="100%" height="auto">
+        </div>
+      }
+      <p class="u-color-text-primary u-fs-14"> {{ item.label }} </p>
     </div>
-    <p class="u-color-text-primary u-fs-14"> {{ item.label }} </p>
-  </div>
+  }
 </div>

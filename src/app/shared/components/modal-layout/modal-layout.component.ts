@@ -1,14 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
+import { NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'jav-modal-layout',
-  templateUrl: './modal-layout.component.html'
+    selector: 'jav-modal-layout',
+    templateUrl: './modal-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgStyle]
 })
 export class ModalLayoutComponent implements OnInit {
 
-  @Input() wrapperWidth: string = "fit-content";
+  readonly wrapperWidth = input<string>("fit-content");
 
-  constructor() { }
 
   ngOnInit(): void {
   }

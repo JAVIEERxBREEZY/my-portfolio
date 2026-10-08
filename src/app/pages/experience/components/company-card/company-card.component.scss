@@ -1,12 +1,14 @@
-@use "~/src/scss/settings/variables" as v;
-@use "~/src/scss/tools/media-queries" as mq;
+@use "sass:map";
+
+@use "../../../../../scss/settings/variables" as v;
+@use "../../../../../scss/tools/media-queries" as mq;
 
 $c: #{v.$prefix} + "company-card";
 
 #{$c} {
 
   // #region BASE STYLES
-  background-color: map-get($map: v.$color-map, $key: "white");
+  background-color: map.get($map: v.$color-map, $key: "white");
   border-radius: 10px;
   width: 550px;
   min-height: 100px;
@@ -62,7 +64,7 @@ $c: #{v.$prefix} + "company-card";
 
   &__seemore {
     span {
-      color: map-get($map: v.$color-map, $key: "comp1");
+      color: map.get($map: v.$color-map, $key: "comp1");
       cursor: pointer;
 
       &:hover, &:focus, &:focus-visible  {
