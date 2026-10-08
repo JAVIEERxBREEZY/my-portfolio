@@ -6,7 +6,7 @@ import { HeaderComponent } from './core/layout/header/header.component';
 import { DropdownListComponent } from './shared/components/dropdown-list/dropdown-list.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
 import { MenuComponent } from './core/layout/sidebar/components/menu/menu.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -37,16 +37,15 @@ import { CardComponent } from './shared/components/card/card.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: httpTranslateLoader,
-        deps: [ HttpClient ]
+        deps: [HttpClient]
       }
     })
   ],
-  providers: [],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
