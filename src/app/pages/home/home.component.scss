@@ -1,5 +1,5 @@
 @use "../../../scss/settings/variables" as v;
-@use "~/src/scss/tools/media-queries" as mq;
+@use "../../../scss/tools/media-queries" as mq;
 
 $c: #{v.$prefix} + "home";
 

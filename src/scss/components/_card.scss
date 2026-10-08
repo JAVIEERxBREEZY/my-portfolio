@@ -1,6 +1,6 @@
-@use "~/src/scss/settings/variables" as v;
-@use "~/src/scss/tools/mixins" as m;
-@use "~/src/scss/tools/media-queries" as mq;
+@use "../settings/variables" as v;
+@use "../tools/mixins" as m;
+@use "../tools/media-queries" as mq;
 
 
 .c-card {
