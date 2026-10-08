@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
-import { CommonModule } from '@angular/common';
 import { provideZoneChangeDetection } from '@angular/core';
-import { provideTranslateService, TranslatePipe } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 import TypeIt from 'typeit';
 import { LanguageService } from '../../core/services/language.service';
@@ -30,8 +29,7 @@ describe('HomeComponent with OnPush', () => {
     });
 
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      imports: [CommonModule, TranslatePipe],
+      imports: [HomeComponent],
       providers: [
         provideZoneChangeDetection(),
         provideTranslateService(),

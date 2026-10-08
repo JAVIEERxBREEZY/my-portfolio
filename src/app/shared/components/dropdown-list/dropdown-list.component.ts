@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild, HostListener, ElementRef, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { IDropdownPosition, IDropdownListItem } from '../../../core/models/interfaces/dropdown-list.interface';
 import { Lang } from 'src/app/core/models/types/lang.type';
+import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'jav-dropdown-list',
     templateUrl: './dropdown-list.component.html',
     styleUrls: ['./dropdown-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class DropdownListComponent implements OnInit {
 

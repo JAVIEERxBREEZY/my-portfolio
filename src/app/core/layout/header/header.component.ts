@@ -1,19 +1,20 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { IDropdownListItem, IDropdownPosition } from 'src/app/core/models/interfaces/dropdown-list.interface';
 import { Subscription } from 'rxjs';
 import { SidebarStatusService } from 'src/app/shared/services/sidebar-status.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Lang } from '../../models/types/lang.type';
 import { SUPPORTED_LANGS } from '../../models/types/lang.type';
+import { DropdownListComponent } from '../../../shared/components/dropdown-list/dropdown-list.component';
 
 @Component({
     selector: 'jav-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [DropdownListComponent, TranslatePipe]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private readonly _ls = inject(LanguageService);

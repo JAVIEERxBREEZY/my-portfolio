@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { ComponentFixture } from '@angular/core/testing';
-import { provideZoneChangeDetection } from '@angular/core';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
-import { AppModule } from './app.module';
+import { appConfig } from './app.config';
 import { LanguageService } from './core/services/language.service';
 import { SidebarStatusService } from './shared/services/sidebar-status.service';
 
@@ -22,8 +21,8 @@ describe('Portfolio with OnPush', () => {
     spyOn(document.documentElement, 'setAttribute');
 
     TestBed.configureTestingModule({
-      imports: [AppModule],
-      providers: [provideZoneChangeDetection(), provideHttpClientTesting()]
+      imports: [AppComponent],
+      providers: [...appConfig.providers, provideHttpClientTesting()]
     });
 
     const translate = TestBed.inject(TranslateService);

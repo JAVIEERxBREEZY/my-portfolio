@@ -2,13 +2,16 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRe
 import { LanguageService } from './core/services/language.service';
 import { SidebarStatusService } from './shared/services/sidebar-status.service';
 import { Subscription } from 'rxjs';
+import { HeaderComponent } from './core/layout/header/header.component';
+import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'jav-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [HeaderComponent, SidebarComponent, RouterOutlet]
 })
 export class AppComponent implements OnInit, OnDestroy {
   private readonly _ls = inject(LanguageService);

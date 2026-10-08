@@ -3,12 +3,14 @@ import { IMenuItem } from 'src/app/core/models/interfaces/menu-item.interface';
 import { NavigationEnd, Router } from '@angular/router';
 import { MENU_ITEMS } from 'src/app/core/models/constants/menu-items.constants';
 import { SidebarStatusService } from 'src/app/shared/services/sidebar-status.service';
+import { NgClass } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'jav-menu',
     templateUrl: './menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgClass, TranslatePipe]
 })
 export class MenuComponent implements OnDestroy {
   private readonly _router = inject(Router);

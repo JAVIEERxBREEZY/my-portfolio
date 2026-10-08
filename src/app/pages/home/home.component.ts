@@ -4,13 +4,14 @@ import { LanguageService } from 'src/app/core/services/language.service';
 import TypeIt from "typeit";
 import { ITypeitText } from './interfaces/typeit-text.interface';
 import { TYPEIT_ES, TYPEIT_EN, DELETE_EN, DELETE_ES } from './constants/typeit.constants';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'jav-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [TranslatePipe]
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly _ls = inject(LanguageService);

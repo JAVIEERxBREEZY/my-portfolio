@@ -1,12 +1,15 @@
 import { Component, OnInit, HostListener, ChangeDetectionStrategy, input } from '@angular/core';
 import { ICompaniesCard } from 'src/app/core/models/interfaces/companies-card.interface';
+import { ModalLayoutComponent } from '../../../../shared/components/modal-layout/modal-layout.component';
+import { ExpDetailsComponent } from '../exp-details/exp-details.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'jav-company-card',
     templateUrl: './company-card.component.html',
     styleUrls: ['./company-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ModalLayoutComponent, ExpDetailsComponent, TranslatePipe]
 })
 export class CompanyCardComponent implements OnInit {
 

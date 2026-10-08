@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { AppModule } from '../../app.module';
+import { appConfig } from '../../app.config';
 import { LanguageService } from './language.service';
 
 @Component({
@@ -24,8 +24,8 @@ describe('Language translations integration', () => {
     spyOn(document.documentElement, 'setAttribute');
 
     TestBed.configureTestingModule({
-      imports: [AppModule, TranslationTestComponent],
-      providers: [provideHttpClientTesting()]
+      imports: [TranslationTestComponent],
+      providers: [...appConfig.providers, provideHttpClientTesting()]
     });
 
     language = TestBed.inject(LanguageService);

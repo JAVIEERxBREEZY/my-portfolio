@@ -1,12 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardComponent } from './card.component';
 import { Pipe, PipeTransform } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 /** Mock del pipe de traducciones: devuelve la misma key  */
-@Pipe({
-    name: 'translate',
-    standalone: false
-})
+@Pipe({ name: 'translate' })
 class MockTranslatePipe implements PipeTransform {
     transform(value: any): any { return value; }
 }
@@ -17,7 +15,10 @@ describe('CardComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [CardComponent, MockTranslatePipe]
+            imports: [CardComponent]
+        }).overrideComponent(CardComponent, {
+            remove: { imports: [TranslatePipe] },
+            add: { imports: [MockTranslatePipe] }
         }).compileComponents();
 
         fixture = TestBed.createComponent(CardComponent);
