@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { IDropdownListItem, IDropdownPosition } from 'src/app/core/models/interfaces/dropdown-list.interface';
@@ -12,7 +12,7 @@ import { SUPPORTED_LANGS } from '../../models/types/lang.type';
     selector: 'jav-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {
@@ -53,7 +53,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // #region CONSTRUCTOR & LIFECYCLE HOOKS
   constructor(private _ls: LanguageService, private _ts: TranslateService,
     private _sss: SidebarStatusService,
-    private _router: Router
+    private _router: Router,
+    private _cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -73,9 +74,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public getInitialLang(): Subscription {
     return this._ls.activeLanguage$.subscribe((res) => {
       this.activeLang = res;
+      this._cdr.markForCheck();
     },
     err => {
       this.activeLang = 'es';
+      this._cdr.markForCheck();
     });
   }
 
@@ -94,6 +97,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.activeRoute = 'CONTACT';
             break;
         }
+        this._cdr.markForCheck();
       }
     });
   }
@@ -116,6 +120,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private suscribeToSidebarStatusService(): Subscription {
     return this._sss.getSidebarActive().subscribe((isActive: boolean) => {
       this.sidebarActive = isActive;
+      this._cdr.markForCheck();
     });
   }
 

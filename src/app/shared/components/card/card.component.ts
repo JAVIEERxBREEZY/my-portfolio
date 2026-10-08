@@ -5,7 +5,7 @@ import { ICard, ICardColors } from 'src/app/core/models/interfaces/card.interfac
     selector: 'jav-card',
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class CardComponent implements OnInit {

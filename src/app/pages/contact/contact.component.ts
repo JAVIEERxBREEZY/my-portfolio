@@ -8,7 +8,7 @@ import { AppOverflowService } from 'src/app/core/services/app-overflow.service';
     selector: 'jav-contact',
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class ContactComponent implements OnInit, OnDestroy {

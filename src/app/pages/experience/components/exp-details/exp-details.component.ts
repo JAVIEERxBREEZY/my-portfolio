@@ -8,7 +8,7 @@ import { FADE_IN_OUT } from 'src/app/shared/animations/fade-in-out.animation';
     templateUrl: './exp-details.component.html',
     styleUrls: ['./exp-details.component.scss'],
     animations: [FADE_IN_OUT],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class ExpDetailsComponent implements OnInit {

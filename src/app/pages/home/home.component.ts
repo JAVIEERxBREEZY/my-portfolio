@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from 'src/app/core/services/language.service';
 import TypeIt from "typeit";
@@ -9,7 +9,7 @@ import { TYPEIT_ES, TYPEIT_EN, DELETE_EN, DELETE_ES } from './constants/typeit.c
     selector: 'jav-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -23,9 +23,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   //#endregion
 
   //#region VARIABLES
-  public shouldRender: boolean = true;
   private activeLang: "es" | "en" | "" = "";
   public textCompleted: boolean = false;
+  private viewInitialized: boolean = false;
+  private startTimer?: ReturnType<typeof setTimeout>;
 
   private firstTypeitInstance?: TypeIt;
   private secondTypeitInstance?: TypeIt;
@@ -34,45 +35,62 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   //#endregion
 
   //#region CONSTRUCTOR & LIFECYCLE HOOKS
-  constructor(private _ls: LanguageService) { }
+  constructor(private _ls: LanguageService, private _cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    const observableLang$ = this.getLang();
+    this.listObservers$.push(this.getLang());
   }
 
   ngAfterViewInit(): void {
-      this.activeLang == "es" ? this.generateFirstString(this.typeitSpanish, this.deleteSpanish) : this.generateFirstString(this.typeitEnglish, this.deleteEnglish);
+    this.viewInitialized = true;
+    this.restartAnimation();
   }
 
   ngOnDestroy() {
     this.listObservers$.forEach(u => u.unsubscribe());
+    this.stopAnimation();
   }
   //#endregion
 
   //#region PRIVATE METHODS
   private getLang(): Subscription {
     return this._ls.activeLanguage$.subscribe((lang: string) => {
-      if (this.activeLang == "") { this.activeLang = lang as "es" | "en"; }
-      else if (this.activeLang !== lang) {
-       this.activeLang = lang as "es" | "en";
-
-        this.shouldRender = false;
-        this.textCompleted = false;
-        setTimeout(() => {
-          this.shouldRender = true;
-        }, 100);
-        this.activeLang == "es" ? this.generateFirstString(this.typeitSpanish, this.deleteSpanish) : this.generateFirstString(this.typeitEnglish, this.deleteEnglish);
+      if (this.activeLang === lang) return;
+      this.activeLang = lang as "es" | "en";
+      if (this.viewInitialized) {
+        this.restartAnimation();
       }
     });
   }
 
+  private restartAnimation(): void {
+    this.stopAnimation();
+    this.cleanMessage();
+    this.textCompleted = false;
+    this._cdr.markForCheck();
+    this.activeLang === "es"
+      ? this.generateFirstString(this.typeitSpanish, this.deleteSpanish)
+      : this.generateFirstString(this.typeitEnglish, this.deleteEnglish);
+  }
+
+  private stopAnimation(): void {
+    clearTimeout(this.startTimer);
+    this.startTimer = undefined;
+    this.firstTypeitInstance?.destroy();
+    this.secondTypeitInstance?.destroy();
+    this.firstTypeitInstance = undefined;
+    this.secondTypeitInstance = undefined;
+  }
+
   private generateFirstString(lang: ITypeitText, deletes: number[]): void {
-    setTimeout(() => {
-      new TypeIt("#hi-message", {
+    this.startTimer = setTimeout(() => {
+      this.startTimer = undefined;
+      this.firstTypeitInstance = new TypeIt("#hi-message", {
         cursor: false,
         speed: 100,
         waitUntilVisible: true,
-        afterComplete: async () => {
+        afterComplete: (instance: TypeIt) => {
+          if (instance.is('destroyed')) return;
           this.generateSecondString(lang, deletes);
         }
       }).type(lang.hi, { delay: 200 })
@@ -97,8 +115,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       loop: false,
       speed: 75,
       waitUntilVisible: true,
-      afterComplete: () => {
+      afterComplete: (instance: TypeIt) => {
+        if (instance.is('destroyed')) return;
         this.textCompleted = true;
+        this._cdr.markForCheck();
       }
     }).type(lang.iam, { delay: 200 })
     .pause(200)

@@ -6,7 +6,7 @@ import { Lang } from 'src/app/core/models/types/lang.type';
     selector: 'jav-dropdown-list',
     templateUrl: './dropdown-list.component.html',
     styleUrls: ['./dropdown-list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class DropdownListComponent implements OnInit {

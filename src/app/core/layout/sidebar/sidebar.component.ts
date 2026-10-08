@@ -4,7 +4,7 @@ import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from
     selector: 'jav-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class SidebarComponent implements OnInit {

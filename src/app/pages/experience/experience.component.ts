@@ -7,7 +7,7 @@ import { AppOverflowService } from 'src/app/core/services/app-overflow.service';
     selector: 'jav-experience',
     templateUrl: './experience.component.html',
     styleUrls: ['./experience.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class ExperienceComponent implements OnInit, OnDestroy {

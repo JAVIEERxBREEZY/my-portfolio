@@ -5,7 +5,7 @@ import { ICompaniesCard } from 'src/app/core/models/interfaces/companies-card.in
     selector: 'jav-company-card',
     templateUrl: './company-card.component.html',
     styleUrls: ['./company-card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export class CompanyCardComponent implements OnInit {
